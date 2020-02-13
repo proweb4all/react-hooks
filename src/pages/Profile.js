@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from 'react'
 import { GithubContext } from '../context/github/githubContext'
 import { Link } from 'react-router-dom'
+import { Repos } from '../components/Repos'
 
 export const Profile = ({ match }) => {
   const { getUser, getRepos, loading, user, repos } = useContext(GithubContext)
@@ -24,9 +25,9 @@ export const Profile = ({ match }) => {
         <div className='card-body'>
           <div className='row'>
             <div className='col-sm-3 text-center'>
+              <h2>{name}</h2>
               <img src={avatar_url} alt={name} style={{width: 150}}/>
-              <h1>{name}</h1>
-                {location && <p>Местоположение: {location}</p>}
+              {location && <p>Местоположение: {location}</p>}
             </div>
             <div className='col'>
               {bio && <>
@@ -38,7 +39,7 @@ export const Profile = ({ match }) => {
                  className='btn btn-dark'
                  rel='noopener noreferrer'
               >Открыть профиль</a>
-              <ul>
+              <ul className='mt-3'>
                 {login && <li>
                   <strong>Username: </strong> {login}
                 </li>}
@@ -57,6 +58,7 @@ export const Profile = ({ match }) => {
           </div>
         </div>
       </div>
+      <Repos repos={repos} />
     </>
   )
 }
